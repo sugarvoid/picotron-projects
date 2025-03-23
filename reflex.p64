@@ -1,0 +1,786 @@
+picotron cartridge // www.picotron.net
+version 2
+
+:: gfx/
+:: gfx/0.gfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMDo0NCIscmV2aXNpb249MTI1Nl1dbHo0AH4AAAASMQAA8yF7WzBdPXtibXA9cHh1
+AEMgEBAE8FYHEAfAF9AXwAcQB-BWLGZsYWdzPTAscGFuX3gIAMt5PTAsem9vbT04fSw_AB-wMQD-
+---------------------------------------------------------------XUG09OH19
+:: gfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMToxOCJdXQ==
+:: map/
+:: map/0.map
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMDo0NCIscmV2aXNpb249MTI1NF1dbHo0AHEAAABbEAAA8Ah7e2JtcD11c2VyZGF0
+YSgiaTE2IiwzMgMALyIwAQD----------zMvMTABAP--------_z8QoiKSxoaWRkZW49ZmFsc2Us
+cGFuX3g9LTE2CgDSeT0wLHRpbGVfaD0xNgoAEHcKAJB6b29tPTE0fX0=
+:: map/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMToxOCJdXQ==
+:: sfx/
+:: sfx/0.sfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMDo0NCIscmV2aXNpb249MTI0OV1dbHo0ALgAAAB7CgAA-zBweHUAAygAAAQABA9A
+EAIOAAGgASACoA4ADxAADfDKAQIDQA8PkAQFBgdADJAICQoLQAyQDwwPDQ8ODEAM8P8BAOv-J6oB
+EAYPIBABIAEgAfAAAhACDhABIA8hIAEwD0Dwww8oD--wxg-4Cg--D4AP9w8NAfAJARAGDjAA----
+--_9H-8BAKzzBcgPQAAPEEAPRv--LwD9Lw79L-BwEwArKP0SAC-9sAoASB--AQD-3FD-----Aw==
+:: sfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMToxOCJdXQ==
+:: clock.lua
+--[[pod_format="raw",created="2025-03-08 13:27:23",modified="2025-03-23 19:30:44",revision=559]]
+clock = {}
+clock.__index = clock
+
+function clock.new()
+    local _c = setmetatable({}, clock)
+    _c.seconds = 0
+    _c.t = 0
+    _c.is_running = false
+    return _c
+end
+
+function clock:tick()
+ 	self.seconds += 1
+   self.t = 0
+end
+
+function clock:update()
+	if self.is_running then
+   	self.t += 1
+      if self.t >= 60 then
+      	self:tick()
+      end
+   end
+end
+
+function clock:stop()
+	self.is_running = false
+end
+
+function clock:start()
+	self.is_running = true
+end
+
+function clock:restart()
+	self.is_running = false
+   self.t = 0
+   self.seconds = 0
+end
+
+:: flux.lua
+--[[pod_format="raw",created="2025-03-08 01:33:06",modified="2025-03-08 01:56:25",revision=168]]
+--
+-- flux
+--
+-- Copyright (c) 2016 rxi
+--
+-- This library is free software; you can redistribute it and/or modify it
+-- under the terms of the MIT license. See LICENSE for details.
+--
+
+local flux = { _version = "0.1.5" }
+flux.__index = flux
+
+flux.tweens = {}
+flux.easing = { linear = function(p) return p end }
+
+local easing = {
+  quad    = "p * p",
+  cubic   = "p * p * p",
+  quart   = "p * p * p * p",
+  quint   = "p * p * p * p * p",
+  expo    = "2 ^ (10 * (p - 1))",
+  sine    = "-math.cos(p * (math.pi * .5)) + 1",
+  --circ    = "-(math.sqrt(1 - (p * p)) - 1)",
+  back    = "p * p * (2.7 * p - 1.7)",
+  elastic = "-(2^(10 * (p - 1)) * math.sin((p - 1.075) * (math.pi * 2) / .3))"
+}
+
+local makefunc = function(str, expr)
+  local load = loadstring or load
+  return load("return function(p) " .. str:gsub("%$e", expr) .. " end")()
+end
+
+for k, v in pairs(easing) do
+  flux.easing[k .. "in"] = makefunc("return $e", v)
+  flux.easing[k .. "out"] = makefunc([[
+    p = 1 - p
+    return 1 - ($e)
+  ]], v)
+  flux.easing[k .. "inout"] = makefunc([[
+    p = p * 2
+    if p < 1 then
+      return .5 * ($e)
+    else
+      p = 2 - p
+      return .5 * (1 - ($e)) + .5
+    end
+  ]], v)
+end
+
+
+
+local tween = {}
+tween.__index = tween
+
+local function makefsetter(field)
+  return function(self, x)
+    local mt = getmetatable(x)
+    if type(x) ~= "function" and not (mt and mt.__call) then
+      error("expected function or callable", 2)
+    end
+    local old = self[field]
+    self[field] = old and function() old() x() end or x
+    return self
+  end
+end
+
+local function makesetter(field, checkfn, errmsg)
+  return function(self, x)
+    if checkfn and not checkfn(x) then
+      error(errmsg:gsub("%$x", tostring(x)), 2)
+    end
+    self[field] = x
+    return self
+  end
+end
+
+tween.ease  = makesetter("_ease",
+                         function(x) return flux.easing[x] end,
+                         "bad easing type '$x'")
+tween.delay = makesetter("_delay",
+                         function(x) return type(x) == "number" end,
+                         "bad delay time; expected number")
+tween.onstart     = makefsetter("_onstart")
+tween.onupdate    = makefsetter("_onupdate")
+tween.oncomplete  = makefsetter("_oncomplete")
+
+
+function tween.new(obj, dur, vars)
+  local self = setmetatable({}, tween)
+  self.obj = obj
+  self.rate = dur > 0 and 1 / dur or 0
+  self.progress = dur > 0 and 0 or 1
+  self._delay = 0
+  self._ease = "quadout"
+  self.vars = {}
+  for k, v in pairs(vars) do
+    if type(v) ~= "number" then
+      error("bad value for key '" .. k .. "'; expected number")
+    end
+    self.vars[k] = v
+  end
+  return self
+end
+
+
+function tween:init()
+  for k, v in pairs(self.vars) do
+    local x = self.obj[k]
+    if type(x) ~= "number" then
+      error("bad value on object key '" .. k .. "'; expected number")
+    end
+    self.vars[k] = { start = x, diff = v - x }
+  end
+  self.inited = true
+end
+
+
+function tween:after(...)
+  local t
+  if select("#", ...) == 2 then
+    t = tween.new(self.obj, ...)
+  else
+    t = tween.new(...)
+  end
+  t.parent = self.parent
+  self:oncomplete(function() flux.f_add(self.parent, t) end)
+  return t
+end
+
+
+function tween:stop()
+  flux.remove(self.parent, self)
+end
+
+
+
+function flux.group()
+  return setmetatable({}, flux)
+end
+
+
+function flux:to(obj, dur, vars)
+  return flux.f_add(self, tween.new(obj, dur, vars))
+end
+
+
+function flux:update(deltatime)
+  for i = #self, 1, -1 do
+    local t = self[i]
+    if t._delay > 0 then
+      t._delay = t._delay - deltatime
+    else
+      if not t.inited then
+        flux.clear(self, t.obj, t.vars)
+        t:init()
+      end
+      if t._onstart then
+        t._onstart()
+        t._onstart = nil
+      end
+      t.progress = t.progress + t.rate * deltatime
+      local p = t.progress
+      local x = p >= 1 and 1 or flux.easing[t._ease](p)
+      for k, v in pairs(t.vars) do
+        t.obj[k] = v.start + x * v.diff
+      end
+      if t._onupdate then t._onupdate() end
+      if p >= 1 then
+        flux.remove(self, i)
+        if t._oncomplete then t._oncomplete() end
+      end
+    end
+  end
+end
+
+
+function flux:clear(obj, vars)
+  for t in pairs(self[obj]) do
+    if t.inited then
+      for k in pairs(vars) do t.vars[k] = nil end
+    end
+  end
+end
+
+
+function flux:f_add(tween)
+  -- Add to object table, create table if it does not exist
+  local obj = tween.obj
+  self[obj] = self[obj] or {}
+  self[obj][tween] = true
+  -- Add to array
+  table.insert(self, tween)
+  tween.parent = self
+  return tween
+end
+
+
+function flux:remove(x)
+  if type(x) == "number" then
+    -- Remove from object table, destroy table if it is empty
+    local obj = self[x].obj
+    self[obj][self[x]] = nil
+    if not next(self[obj]) then self[obj] = nil end
+    -- Remove from array
+    self[x] = self[#self]
+    return table.remove(self)
+  end
+  for i, v in ipairs(self) do
+    if v == x then
+      return flux.remove(self, i)
+    end
+  end
+end
+
+
+function get_flux()
+	local your_flux = {
+	  to      = function(...) return flux.to(flux.tweens, ...) end,
+	  update  = function(...) return flux.update(flux.tweens, ...) end,
+	  remove  = function(...) return flux.remove(flux.tweens, ...) end,
+	}
+	setmetatable(your_flux, flux)
+	return your_flux
+
+end
+
+
+
+:: functions.lua
+--[[pod_format="raw",created="2025-03-08 02:07:53",modified="2025-03-23 19:30:44",revision=1060]]
+
+function is_colliding(m_x, m_y, box)
+    if m_x < box.pos.x + box.w and
+        m_x > box.pos.x and
+        m_y < box.pos.y + box.h and
+        m_y > box.pos.y then
+        return true
+    else
+        return false
+    end
+end
+
+function randi_rang(l, h)
+    return flr(rnd(h)) + l
+end
+
+function randi_rang(l, h)
+    return flr(rnd(h - l + 1)) + l
+end
+
+function dist(a, b)
+    return abs(a.x - b.x) + abs(a.y - b.y)
+end
+
+function change_gamestate(new_s)
+	gamestate = new_s
+end
+:: label.lua
+--[[pod_format="raw",created="2025-03-11 22:48:07",modified="2025-03-23 19:30:44",revision=753]]
+
+Label={}
+Label.__index=Label
+
+
+
+ set_draw_target(userdata("u8", 1, 1))
+
+function Label.new(text, x, y, col)
+    local _l = setmetatable({},Label)
+
+    _l.w = 35--print(text, 0, -20)
+    --set_draw_target(userdata("u8", 1, 1))
+	local foo = print(text, 0, 0)
+	set_draw_target()
+	_l.interactive=true
+	_l.w=foo*2
+    _l.h = 16
+    _l.x = x
+    _l.y = y
+    _l.text = text
+    _l.col = col
+    _l.default_col = col
+    _l.hover_col = col
+    _l.is_hovered = false
+    return _l
+end
+
+function Label:update()
+	if is_colliding_lbl(mx, my, self) then
+		self.hovered = true
+		self.col = 12
+	else
+		self.col = self.default_col
+		self.hovered = false
+	end
+	
+	self:check_clicked()
+end
+
+function Label:check_clicked()
+	if self.hovered and mb == 1 then
+   	notify(self.text .. " was clicked")
+   	if gamestate == GAMESTATES.TITLE then
+   		if self.text == "Play" then
+	   		gamestate = GAMESTATES.MODE_SELECT
+	   		return
+	   	end
+   	elseif gamestate == GAMESTATES.MODE_SELECT then
+	   	if self.text == "Easy" then
+	   		gamemode = GAMEMODES.EASY
+	   	elseif self.text == "Normal" then
+	   		gamemode = GAMEMODES.NORMAL
+	   	elseif self.text == "Hard" then
+	   		gamemode = GAMEMODES.HARD
+	   	end
+	   	
+   		start_game()
+
+   		return
+		elseif gamestate == GAMESTATES.RESULTS then
+	   	if self.text == "Back to Main" then
+	   		gamestate = GAMESTATES.TITLE
+	   		return
+	   	end
+   	end
+	end
+end
+
+
+
+function is_colliding_lbl(m_x, m_y, box)
+    if m_x < box.x + box.w and
+        m_x > box.x and
+        m_y < box.y + box.h and
+        m_y > box.y then
+        return true
+    else
+        return false
+    end
+end
+
+function Label:draw()
+	--rect(self.x, self.y, self.x+self.w, self.y+16, 3)
+	print("\^t\^w"..self.text, self.x, self.y, self.col)
+end
+:: main.lua
+--[[pod_format="raw",created="2025-03-06 13:32:00",modified="2025-03-23 19:30:44",revision=1576]]
+
+include "clock.lua"
+include "functions.lua"
+include "square.lua"
+include "flux.lua"
+include "label.lua"
+
+GAMEMODES = {
+	EASY = 1,
+	NORMAL = 2,
+	HARD = 3
+}
+
+GAMESTATES = {
+	TITLE=1,
+	MODE_SELECT=2,
+	GAME=3,
+	RESULTS=4
+}
+
+--clicks = 0 
+--hits = 0
+--missed = 0
+--average_time = 0
+gamestate = GAMESTATES.GAME
+gamemode = GAMEMODES.EASY
+gamestate = GAMESTATES.TITLE
+
+local REAL_COL = 27
+local FAKE_COL = 8
+
+local last_time = time()
+local dt = 0
+local bg_rect = {x=50,y=0}
+
+local lbl_title = Label.new("Relex Game", 180, 100, 7)
+
+local lbl_play =  Label.new("Play", 220, 160, 7)
+local lbl_info =  Label.new("Info", 220, 200, 7)
+
+
+local lbl_easy = Label.new("Easy", 150, 150, 7)
+local lbl_normal = Label.new("Normal", 150, 172, 7)
+local lbl_hard = Label.new("Hard", 150, 194, 7)
+
+local lbl_back_main = Label.new("Back to main", 170, 194, 7)
+
+flux = get_flux()
+game_clock = clock.new()
+
+
+mx, my, mb = nil, nil, nil
+m_delay = 0
+
+function update_dt()
+	t = time()
+  	dt = t - last_time
+  	last_time = t
+end
+
+function _init()
+	all_squares = {}
+	--real_square = Square.new(REAL_COL, true)
+	--fake_square = Square.new(FAKE_COL, false)
+	add(all_squares, fake_square)
+	add(all_squares,real_square)
+	
+end
+
+function _update()
+	mx,my,mb = mouse()
+	
+	
+	update_dt()
+  	flux.update(dt)
+	
+	if gamestate == GAMESTATES.TITLE then
+		update_title()
+	elseif gamestate == GAMESTATES.MODE_SELECT then
+		update_mode_select()
+	elseif gamestate == GAMESTATES.GAME then
+		update_game()
+	elseif gamestate == GAMESTATES.RESULTS then
+		update_results()
+	end
+	
+	if mb == 1 then
+		if m_delay == 0 then
+			on_mouse_click(mx, my)
+			m_delay+=1
+			return
+		end
+	else
+		m_delay = 0
+  	end
+
+
+
+end
+
+function on_mouse_click(x,y)
+	notify("click on " .. x .. "," .. y)
+	--TODO: Loop through labels to see if one is hovered
+	-- if so, trigger on_click
+	if gamestate == GAMESTATES.GAME then
+		if game_clock.is_running then
+			clicks+=1
+		end
+	end
+end
+
+function _draw()
+	cls(1)
+	rectfill(bg_rect.x, bg_rect.y, bg_rect.x+380, bg_rect.y+270, 0)
+	rect(bg_rect.x, bg_rect.y, bg_rect.x+380, bg_rect.y+269, 7)
+	
+	if gamestate == GAMESTATES.TITLE then
+		draw_title()
+	elseif gamestate == GAMESTATES.MODE_SELECT then
+		draw_mode_select()
+	elseif gamestate == GAMESTATES.GAME then
+		draw_game()
+	elseif gamestate == GAMESTATES.RESULTS then
+		draw_results()
+	else
+		draw_gameover()
+	end	
+end
+
+function update_title()
+	lbl_play:update()
+	lbl_info:update()
+end
+
+function draw_title()
+	if lbl_info.hovered then
+		print("Click on the green square", 170, 100, 7)
+	else
+		lbl_title:draw()
+	end
+	
+	lbl_play:draw()
+	lbl_info:draw()
+	--print("\^t\^w".."PLAY", 100, 10)
+end
+
+function update_mode_select()
+	lbl_easy:update()
+	lbl_normal:update()
+	lbl_hard:update()
+end
+
+function update_game()
+	game_clock:update()
+	
+  	
+  	if game_clock.seconds == 10 then
+  		change_gamestate(GAMESTATES.RESULTS)
+  		missed = clicks - hits
+  	end
+  	for s in all(all_squares) do
+  		update_square(s)
+  	end
+  	
+	if btnp(0) then
+   	on_real_clicked()
+  	end
+end
+
+function draw_mode_select() 
+	lbl_easy:draw()
+	lbl_normal:draw()
+	lbl_hard:draw()
+end
+
+function draw_game()
+	print("\^t\^w".."Easy Mode", 100, 10)
+	print(game_clock.seconds, bg_rect.x+3, 200, 3)
+	for s in all(all_squares) do
+		draw_square(s)
+  	end
+  	print("clicks:" .. clicks, bg_rect.x+3, 12, 7)
+  	print("hits: " .. hits, bg_rect.x+3, 22, 7)
+  	print("missed: " .. missed, bg_rect.x+3, 30, 7)
+  	print("avg time: " .. average_time, bg_rect.x+3, 40, 7)
+end
+
+function update_results()
+	lbl_back_main:update()
+end
+
+function draw_results()
+	print("\^t\^w".. "GAME OVER", 100, 10)
+	print("Clicks: "..clicks, 90, 120, 7)
+	print("Hits: "..hits, 90, 120, 7)
+	print("Missed: "..missed, 90, 120, 7)
+	print("Avg Time: "..average_time, 90, 120, 7)
+	lbl_back_main:draw()
+end
+
+function start_game()
+
+	if gamemode == GAMEMODES.EASY 
+		or gamemode == GAMEMODES.NORMAL then
+		fake_square.visable = false
+		fake_square.is_active = false
+	end
+	clicks = 0
+	clicks -=1 --horrible way to get around mouse click logic
+	hits = 0
+	missed = 0
+	average_time = 0
+	
+	gamestate = GAMESTATES.GAME
+	notify("starting game")
+	game_clock:start()
+end
+:: square.lua
+--[[pod_format="raw",created="2025-03-06 13:39:42",modified="2025-03-23 19:30:44",revision=1423]]
+
+SQUARE_W = 35
+SQUARE_H = 35
+local REAL_COL = 27
+local FAKE_COL = 8
+
+function vector_new(x, y)
+    return {
+        x = x or 0,
+        y = y or 0,
+    }
+end
+
+function get_next_pos()
+	local rx, ry, fx, fy
+	local real_pos = vector_new(0,0)
+	local fake_pos = vector_new(0,0)
+	
+	real_pos.x = randi_rang(60, 385)
+	real_pos.y = randi_rang(20, 220)
+	fake_pos.x = randi_rang(60, 385)
+	fake_pos.y = randi_rang(20, 220)
+	
+	while dist(real_pos, fake_pos) < 100 do
+		fake_pos.x = randi_rang(60, 385)
+		fake_pos.y = randi_rang(20, 220)
+	end
+	
+	return real_pos, fake_pos
+end
+
+function on_real_clicked()
+	local r_pos, f_pos = get_next_pos()
+	
+	move_square(real_square, r_pos)
+	move_square(fake_square, f_pos)
+end
+
+function move_square(s, new_pos)
+	local new_x = randi_rang(60, 385)
+	local new_y = randi_rang(10, 220)
+	s.moving=true
+	flux.to(s.pos, 0.5, { x = new_pos.x, y = new_pos.y }):oncomplete(
+		function() 
+			s.moving=false
+			s.clickable=true
+			if gamemode == GAMEMODES.NORMAL and s.is_active then
+				s.visable = true
+			end
+		end
+	)
+end
+
+real_square = {
+	pos = vector_new(100,100),
+	visable = true,
+	is_active=true,
+	clickable=false,
+   timer = 0 * 60,
+   w = 35,
+   h = 35,
+   colck = clock.new(),
+   default_col = REAL_COL,
+   moving = false,
+   hovered = false,
+   check_clicked=function(self)
+   	if self.hovered and 
+   			mb == 1 and 
+   			not self.moving then
+   		if gamemode == GAMEMODES.NORMAL then
+   			self.visable = false
+   		end
+   		mb = 0
+   		fake_square.pos.x = self.pos.x
+   		fake_square.pos.y = self.pos.y
+   		on_real_clicked()
+			sfx(0)
+			hits+=1
+			return
+		end
+   end,
+}
+
+fake_square = {
+	--x = 385,
+	--y = 100,
+	pos = vector_new(100,100),
+	clickable=true,
+	is_active=true,
+	visable = true,
+   timer = 0 * 60,
+   w = 35,
+   h = 35,
+   colck = clock.new(),
+   default_col = FAKE_COL,
+   moving = false,
+   hovered = false,
+   check_clicked=function(self)
+   	if self.hovered and 
+   			mb == 1 and 
+   			not self.moving and
+   			self.clickable then
+			sfx(1)
+			self.clickable = false
+			score=0
+			return
+		end
+   end,
+   update_tmr=function()
+   	
+   end,
+}
+
+function update_square(s)
+	if s.is_active then
+		if is_colliding(mx, my, s) then
+			s.hovered = true
+			--s.col = 14
+		else
+			s.col = s.default_col
+			s.hovered = false
+		end
+	
+		s:check_clicked()
+	end
+end
+
+function draw_square(s)
+	if s.visable then
+		rectfill(s.pos.x, s.pos.y, s.pos.x+SQUARE_W, s.pos.y+SQUARE_H, s.col)
+   	--print(s.pos.x .. "," .. s.pos.y, s.pos.x, s.pos.y, 7)
+   end
+end
+
+
+
+:: .info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
+My0yMyAxOTozMToxOCIscnVudGltZT0xNix3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
+IzE1OSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0ic3F1YXJlLmx1YSMxMjQiLHdvcmtz
+cGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImZ1bmN0aW9ucy5sdWEjMSIsd29ya3NwYWNlX2luZGV4
+PTF9LHtsb2NhdGlvbj0ibGFiZWwubHVhIzU5Iix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9u
+PSJjbG9jay5sdWEjMTgiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIs
+d29ya3NwYWNlX2luZGV4PTJ9LHtsb2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9
+M30se2xvY2F0aW9uPSJzZngvMC5zZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
+:: [eoc]
