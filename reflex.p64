@@ -4,34 +4,34 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyIscmV2aXNpb249MTQ2MF1dbHo0AH4AAAASMQAA8yF7WzBdPXtibXA9cHh1
+My0yNiAxMjo0MTo0NyIscmV2aXNpb249MTU1MF1dbHo0AH4AAAASMQAA8yF7WzBdPXtibXA9cHh1
 AEMgEBAE8FYHEAfAF9AXwAcQB-BWLGZsYWdzPTAscGFuX3gIAMt5PTAsem9vbT04fSw_AB-wMQD-
 ---------------------------------------------------------------XUG09OH19
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyJdXQ==
+My0yNiAxMjo0MTo0NyJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyIscmV2aXNpb249MTQ1NV1dbHo0AHEAAABbEAAA8Ah7e2JtcD11c2VyZGF0
+My0yNiAxMjo0MTo0NyIscmV2aXNpb249MTU0NV1dbHo0AHEAAABbEAAA8Ah7e2JtcD11c2VyZGF0
 YSgiaTE2IiwzMgMALyIwAQD----------zMvMTABAP--------_z8QoiKSxoaWRkZW49ZmFsc2Us
 cGFuX3g9LTE2CgDSeT0wLHRpbGVfaD0xNgoAEHcKAJB6b29tPTE0fX0=
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyJdXQ==
+My0yNiAxMjo0MTo0NyJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyIscmV2aXNpb249MTQ1MF1dbHo0ANAAAACLCgAA-zBweHUAAygAAAQABA9A
+My0yNiAxMjo0MTo0NyIscmV2aXNpb249MTU0MF1dbHo0ANAAAACLCgAA-zBweHUAAygAAAQABA9A
 EAIOAAGgASACoA4ADxAADfDKAQIDQA8PkAQFBgdADJAICQoLQAyQDwwPDQ8ODEAM8P8BAOv-J6oB
 EAYPIBABIAEgAfAAAhACDhABIA8hIAEwD0Dwww8oD--wxg-4Cg--D4AP9w8NAfAJARAGDjAA----
 --_9H-8BAKzzBcgPQAAPEEAPRv--LwD9Lw79L-BwEwApKP0SAPQFA0APEw8cDyEPGA8V-StA-StO
 -SssAC-9sAoAPh--AQD-3FD-----Aw==
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyJdXQ==
+My0yNiAxMjo0MTo0NyJdXQ==
 :: clock.lua
---[[pod_format="raw",created="2025-03-08 13:27:23",modified="2025-03-26 01:35:33",revision=766]]
+--[[pod_format="raw",created="2025-03-08 13:27:23",modified="2025-03-26 12:41:47",revision=861]]
 clock = {}
 clock.__index = clock
 
@@ -302,7 +302,7 @@ end
 
 
 :: functions.lua
---[[pod_format="raw",created="2025-03-08 02:07:53",modified="2025-03-26 01:35:33",revision=1256]]
+--[[pod_format="raw",created="2025-03-08 02:07:53",modified="2025-03-26 12:41:47",revision=1348]]
 
 function is_colliding(m_x, m_y, box)
     if m_x < box.pos.x + box.w and
@@ -331,7 +331,7 @@ function change_gamestate(new_s)
 	gamestate = new_s
 end
 :: label.lua
---[[pod_format="raw",created="2025-03-11 22:48:07",modified="2025-03-26 01:35:33",revision=972]]
+--[[pod_format="raw",created="2025-03-11 22:48:07",modified="2025-03-26 12:41:47",revision=1063]]
 
 Label={}
 Label.__index=Label
@@ -393,7 +393,7 @@ function Label:draw()
 	print("\^t\^w"..self.text, self.x, self.y, self.col)
 end
 :: main.lua
---[[pod_format="raw",created="2025-03-06 13:32:00",modified="2025-03-26 01:35:33",revision=1859]]
+--[[pod_format="raw",created="2025-03-06 13:32:00",modified="2025-03-26 12:41:47",revision=1969]]
 
 include "clock.lua"
 include "functions.lua"
@@ -436,24 +436,19 @@ click_times = {}
 frame_total = 0
 
 local lbl_title = Label.new("Relex Game", 180, 100, 7)
-
 local lbl_play =  Label.new("Play", 220, 160, 7)
 lbl_play.callback = function() gamestate = GAMESTATES.MODE_SELECT end
 
 local lbl_info =  Label.new("Info", 220, 200, 7)
-
-
-	lbl_easy = Label.new("Easy", 150, 150, 7)
-	lbl_normal = Label.new("Normal", 150, 174, 7)
-	lbl_hard = Label.new("Hard", 150, 198, 5, 7)
-
-local mode_lbls = {}
-
+local lbl_easy = Label.new("Easy", 150, 150, 7)
+local lbl_normal = Label.new("Normal", 150, 174, 7)
+local lbl_hard = Label.new("Hard", 150, 198, 7)
 
 lbl_easy.callback = function()  start_game(1)  end 
 lbl_normal.callback = function() start_game(2)  end 
 lbl_hard.callback = function()  start_game(3)  end 
 
+local mode_lbls = {}
 add(mode_lbls, lbl_easy)
 add(mode_lbls, lbl_normal)
 add(mode_lbls, lbl_hard)
@@ -462,8 +457,6 @@ local lbl_back_main = Label.new("Back to main", 170, 194, 7)
 
 flux = get_flux()
 game_clock = clock.new()
-
-
 mx, my, mb = nil, nil, nil
 m_delay = 0
 
@@ -477,13 +470,10 @@ function _init()
 	all_squares = {}
 	add(all_squares, fake_square)
 	add(all_squares,real_square)
-	
 end
 
 function _update()
 	mx,my,mb = mouse()
-	
-	
 	update_dt()
   	flux.update(dt)
 	
@@ -506,15 +496,10 @@ function _update()
 	else
 		m_delay = 0
   	end
-
-
-
 end
 
 function on_mouse_click(x,y)
 	--notify("click on " .. x .. "," .. y)
-	--TODO: Loop through labels to see if one is hovered
-	-- if so, trigger on_click
 	if gamestate == GAMESTATES.GAME then
 		if game_clock.is_running then
 			clicks+=1
@@ -524,7 +509,6 @@ function on_mouse_click(x,y)
 			if l.hovered then
 				l:do_func()
 			end
-			--return
 		end
 	elseif gamestate == GAMESTATES.TITLE then
 		if lbl_play.hovered then
@@ -578,22 +562,21 @@ function update_mode_select()
 	for l in all(mode_lbls) do
 		l:update()
 	end
-	--lbl_easy:update()
-	--lbl_normal:update()
-	--lbl_hard:update()
 end
 
 function update_game()
 	game_clock:update()
-	
 	frame_total = frame_total + 1
 	
-  	
   	if game_clock.seconds == 10 then
   		change_gamestate(GAMESTATES.RESULTS)
   		game_clock:restart()
   		missed = clicks - hits
+  		average_time = get_time_from_frames(get_average(click_times))
+  		fake_square.visable = false
+		fake_square.is_active = false
   	end
+  	
   	for s in all(all_squares) do
   		update_square(s)
   	end
@@ -607,23 +590,13 @@ function draw_mode_select()
 	for l in all(mode_lbls) do
 		l:draw()
 	end
-
-	--lbl_easy:draw()
-	--lbl_normal:draw()
-	--lbl_hard:draw()
 end
 
 function draw_game()
 	print("\^t\^w"..mode_str, 200, 10)
-	--print(game_clock.seconds, bg_rect.x+3, 200, 3)
 	for s in all(all_squares) do
 		draw_square(s)
   	end
-  	--print("clicks:" .. clicks, bg_rect.x+3, 12, 7)
-  --	print("hits: " .. hits, bg_rect.x+3, 22, 7)
-  	--print("missed: " .. missed, bg_rect.x+3, 30, 7)
-  	--
-  	--print("avg time: " .. get_time_from_frames(frame_total), bg_rect.x+3, 40, 7)
 end
 
 function update_results()
@@ -631,11 +604,11 @@ function update_results()
 end
 
 function draw_results()
-	print("\^t\^w".. "GAME OVER", 100, 10)
+	print("\^t\^w".. "GAME OVER", 200, 10)
 	print("Clicks: "..clicks, 90, 100, 7)
 	print("Hits: "..hits, 90, 110, 7)
 	print("Missed: "..missed, 90, 120, 7)
-	print("Avg Time: "..get_time_from_frames(get_average(click_times)), 90, 130, 7)
+	print("Avg Time: ".. average_time.."s", 90, 130, 7)
 	lbl_back_main:draw()
 end
 
@@ -645,25 +618,23 @@ function start_game(mode)
 	if mode == 1 then
 		mode_str = "Easy Mode"
 		gamemode = GAMEMODES.EASY
-
 	elseif mode == 2 then
 		mode_str = "Normal Mode"
 		gamemode = GAMEMODES.NORMAL
-
 	elseif mode == 3 then
 		mode_str = "Hard Mode"
 		gamemode = GAMEMODES.HARD
 		fake_square.visable = true
 		fake_square.is_active = true
+		fake_square.pos.x = real_square.pos.x
+		fake_square.pos.y = real_square.pos.y
 	end
-
+	
 	clicks = 0
-	--clicks -=1 --horrible way to get around mouse click logic
 	hits = 0
 	missed = 0
 	average_time = 0
 	gamestate = GAMESTATES.GAME
-	notify("starting game")
 	game_clock:start()
 end
 
@@ -695,12 +666,11 @@ function get_average(times)
 	return average
 end
 :: square.lua
---[[pod_format="raw",created="2025-03-06 13:39:42",modified="2025-03-26 01:35:33",revision=1630]]
+--[[pod_format="raw",created="2025-03-06 13:39:42",modified="2025-03-26 12:41:47",revision=1764]]
 
 SQUARE_W = 35
 SQUARE_H = 35
-local REAL_COL = 27
-local FAKE_COL = 8
+SQUARE_COL = 27
 
 function vector_new(x, y)
     return {
@@ -729,9 +699,13 @@ end
 
 function on_real_clicked()
 	local r_pos, f_pos = get_next_pos()
-	
 	move_square(real_square, r_pos)
 	move_square(fake_square, f_pos)
+	if gamemode == GAMEMODES.HARD then
+		fake_square.clock:restart()
+		fake_square.clock:start()
+		fake_square.visable = true
+	end
 end
 
 function move_square(s, new_pos)
@@ -755,10 +729,9 @@ real_square = {
 	is_active=true,
 	clickable=false,
    timer = 0 * 60,
-   w = 35,
-   h = 35,
+   w = SQUARE_W,
+   h = SQUARE_W,
    colck = clock.new(),
-   default_col = REAL_COL,
    moving = false,
    hovered = false,
    check_clicked=function(self)
@@ -787,14 +760,15 @@ fake_square = {
 	is_active=false,
 	visable = false,
    timer = 0 * 60,
-   w = 35,
-   h = 35,
-   colck = clock.new(),
-   default_col = FAKE_COL,
+   is_fake = true,
+   w = SQUARE_W,
+   h = SQUARE_W,
+   clock = clock.new(),
    moving = false,
    hovered = false,
    check_clicked=function(self)
    	if self.hovered and 
+   			not real_square.hovered and
    			mb == 1 and 
    			not self.moving and
    			self.clickable then
@@ -804,28 +778,28 @@ fake_square = {
 			return
 		end
    end,
-   update_tmr=function()
-   	
+   update_tmr=function(self)
+   	self.clock:update()
+   	if self.clock.seconds >= 1 then
+   		self.visable = false
+   	end
    end,
 }
 
 function update_square(s)
 	if s.is_active then
-		if is_colliding(mx, my, s) then
-			s.hovered = true
-			--s.col = 14
-		else
-			s.col = s.default_col
-			s.hovered = false
-		end
-	
+		s.hovered = is_colliding(mx, my, s)
 		s:check_clicked()
+	end
+	
+	if s.is_fake then
+		s:update_tmr()
 	end
 end
 
 function draw_square(s)
 	if s.visable then
-		rectfill(s.pos.x, s.pos.y, s.pos.x+SQUARE_W, s.pos.y+SQUARE_H, s.col)
+		rectfill(s.pos.x, s.pos.y, s.pos.x+SQUARE_W, s.pos.y+SQUARE_H, SQUARE_COL)
    	--print(s.pos.x .. "," .. s.pos.y, s.pos.x, s.pos.y, 7)
    end
 end
@@ -834,11 +808,11 @@ end
 
 :: .info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAwMTozNTozMyIscnVudGltZT0xNix3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
-IzEyOSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0ic3F1YXJlLmx1YSM3NSIsd29ya3Nw
-YWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZnVuY3Rpb25zLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9
-MX0se2xvY2F0aW9uPSJsYWJlbC5sdWEjNDUiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249
-ImNsb2NrLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJnZngvMC5nZngiLHdv
-cmtzcGFjZV9pbmRleD0yfSx7bG9jYXRpb249Im1hcC8wLm1hcCIsd29ya3NwYWNlX2luZGV4PTN9
-LHtsb2NhdGlvbj0ic2Z4LzAuc2Z4Iix3b3Jrc3BhY2VfaW5kZXg9NH19XV0=
+My0yNiAxMjo0MTo0NyIscnVudGltZT0xNix3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
+IzU1Iix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJzcXVhcmUubHVhIzk2Iix3b3Jrc3Bh
+Y2VfaW5kZXg9MX0se2xvY2F0aW9uPSJmdW5jdGlvbnMubHVhIzEiLHdvcmtzcGFjZV9pbmRleD0x
+fSx7bG9jYXRpb249ImxhYmVsLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJj
+bG9jay5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jr
+c3BhY2VfaW5kZXg9Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7
+bG9jYXRpb249InNmeC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
 :: [eoc]
