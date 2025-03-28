@@ -4,34 +4,34 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyIscmV2aXNpb249MTU1MF1dbHo0AH4AAAASMQAA8yF7WzBdPXtibXA9cHh1
+My0yNiAyMzo1NTowOSIscmV2aXNpb249MTU1OV1dbHo0AH4AAAASMQAA8yF7WzBdPXtibXA9cHh1
 AEMgEBAE8FYHEAfAF9AXwAcQB-BWLGZsYWdzPTAscGFuX3gIAMt5PTAsem9vbT04fSw_AB-wMQD-
 ---------------------------------------------------------------XUG09OH19
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyJdXQ==
+My0yNiAyMzo1NTowOSJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyIscmV2aXNpb249MTU0NV1dbHo0AHEAAABbEAAA8Ah7e2JtcD11c2VyZGF0
+My0yNiAyMzo1NTowOSIscmV2aXNpb249MTU1NF1dbHo0AHEAAABbEAAA8Ah7e2JtcD11c2VyZGF0
 YSgiaTE2IiwzMgMALyIwAQD----------zMvMTABAP--------_z8QoiKSxoaWRkZW49ZmFsc2Us
 cGFuX3g9LTE2CgDSeT0wLHRpbGVfaD0xNgoAEHcKAJB6b29tPTE0fX0=
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyJdXQ==
+My0yNiAyMzo1NTowOSJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjAwIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyIscmV2aXNpb249MTU0MF1dbHo0ANAAAACLCgAA-zBweHUAAygAAAQABA9A
+My0yNiAyMzo1NTowOSIscmV2aXNpb249MTU0OV1dbHo0ANAAAACLCgAA-zBweHUAAygAAAQABA9A
 EAIOAAGgASACoA4ADxAADfDKAQIDQA8PkAQFBgdADJAICQoLQAyQDwwPDQ8ODEAM8P8BAOv-J6oB
 EAYPIBABIAEgAfAAAhACDhABIA8hIAEwD0Dwww8oD--wxg-4Cg--D4AP9w8NAfAJARAGDjAA----
 --_9H-8BAKzzBcgPQAAPEEAPRv--LwD9Lw79L-BwEwApKP0SAPQFA0APEw8cDyEPGA8V-StA-StO
 -SssAC-9sAoAPh--AQD-3FD-----Aw==
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyJdXQ==
+My0yNiAyMzo1NTowOSJdXQ==
 :: clock.lua
---[[pod_format="raw",created="2025-03-08 13:27:23",modified="2025-03-26 12:41:47",revision=861]]
+--[[pod_format="raw",created="2025-03-08 13:27:23",modified="2025-03-26 23:55:09",revision=872]]
 clock = {}
 clock.__index = clock
 
@@ -302,7 +302,7 @@ end
 
 
 :: functions.lua
---[[pod_format="raw",created="2025-03-08 02:07:53",modified="2025-03-26 12:41:47",revision=1348]]
+--[[pod_format="raw",created="2025-03-08 02:07:53",modified="2025-03-26 23:55:09",revision=1356]]
 
 function is_colliding(m_x, m_y, box)
     if m_x < box.pos.x + box.w and
@@ -331,7 +331,7 @@ function change_gamestate(new_s)
 	gamestate = new_s
 end
 :: label.lua
---[[pod_format="raw",created="2025-03-11 22:48:07",modified="2025-03-26 12:41:47",revision=1063]]
+--[[pod_format="raw",created="2025-03-11 22:48:07",modified="2025-03-26 23:55:09",revision=1071]]
 
 Label={}
 Label.__index=Label
@@ -392,8 +392,84 @@ function Label:draw()
 	--rect(self.x, self.y, self.x+self.w, self.y+16, 3)
 	print("\^t\^w"..self.text, self.x, self.y, self.col)
 end
+:: label.qoi
+b64$cW9pZgAAAeAAAAEOBAH9-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f390P7-8ejR-gAAAMo-0TXEP9E1xD-ENdE-0DXE
+P8U1xD-ENf39-f390z-RNco-0TXEP9E1xD-ENdE-0DXEP8U1xD-ENf39-f390z-RNco-0TXEP9E1
+xD-ENdE-0DXEP8U1xD-ENf39-f390z-RNco-0TXEP9E1xD-ENdE-0DXEP8U1xD-ENf39-f390z-R
+Nco-0TXEP9E1xD-ENdE-0DXEP8U1xD-ENf39-f390z-RNco-0TXEP9E1xD-ENdE-0DXEP8U1xD-E
+Nf39-f390z-ENcs-xDXEP8Q10T-ENdE-xDXRP8Q10D-FNcQ-xDX9-f39-dM-xDXLP8Q1xD-ENdE-
+xDXRP8Q10T-ENdA-xTXEP8Q1-f39-f3TP8Q1yz-ENcQ-xDXRP8Q10T-ENdE-xDXQP8U1xD-ENf39
+-f390z-ENcs-xDXEP8Q10T-ENdE-xDXRP8Q10D-FNcQ-xDX9-f39-dM-xDXLP8Q1xD-ENdE-xDXR
+P8Q10T-ENdA-xTXEP8Q1-f39-f3TP8Q1yz-ENcQ-xDXRP8Q10T-ENdE-xDXQP8U1xD-ENf39-f39
+0z-RNco-yjXLP8o1yz-ENdE-yjXRP8Q1-f39-f3ZP9E1yj-KNcs-yjXLP8Q10T-KNdE-xDX9-f39
+-dk-0TXKP8o1yz-KNcs-xDXRP8o10T-ENf39-f392T-RNco-yjXLP8o1yz-ENdE-yjXRP8Q1-f39
+-f3ZP9E1yj-KNcs-yjXLP8Q10T-KNdE-xDX9-f39-dk-0TXKP8o1yz-KNcs-xDXRP8o10T-ENf39
+-f392T-RNco-yjXLP8o1yz-ENdE-yjXRP8Q1-f39-f3ZP8Q1xD-FNco-xDXRP8Q10T-ENdE-xDXQ
+P8U1xD-ENf39-f390z-ENcQ-xTXKP8Q10T-ENdE-xDXRP8Q10D-FNcQ-xDX9-f39-dM-xDXEP8U1
+yj-ENdE-xDXRP8Q10T-ENdA-xTXEP8Q1-f39-f3TP8Q1xD-FNco-xDXRP8Q10T-ENdE-xDXQP8U1
+xD-ENf39-f390z-ENcQ-xTXKP8Q10T-ENdE-xDXRP8Q10D-FNcQ-xDX9-f39-dM-xDXEP8U1yj-E
+NdE-xDXRP8Q10T-ENdA-xTXEP8Q1-f39-f3TP8Q1yz-ENcQ-0TXEP8Q10T-QNcU-0DXEP8U1xD-E
+Nf39-f390z-ENcs-xDXEP9E1xD-ENdE-0DXFP9A1xD-FNcQ-xDX9-f39-dM-xDXLP8Q1xD-RNcQ-
+xDXRP9A1xT-QNcQ-xTXEP8Q1-f39-f3TP8Q1yz-ENcQ-0TXEP8Q10T-QNcU-0DXEP8U1xD-ENf39
+-f390z-ENcs-xDXEP9E1xD-ENdE-0DXFP9A1xD-FNcQ-xDX9-f39-dM-xDXLP8Q1xD-RNcQ-xDXR
+P9A1xT-QNcQ-xTXEP8Q1-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f391j-ONck-yTXJP8M1zj-ENcM-zjX9-f39-f3J
+P841yT-JNck-wzXOP8Q1wz-ONf39-f39-ck-zjXJP8k1yT-DNc4-xDXDP841-f39-f39yT-ONck-
+yTXJP8M1zj-ENcM-zjX9-f39-f3JP841yT-JNck-wzXOP8Q1wz-ONf39-f39-cQ-wzXUP8M1yT-D
+NcQ-yDXEP8k1wz-DNf39-f39-c8-wzXUP8M1yT-DNcQ-yDXEP8k1wz-DNf39-f39-c8-wzXUP8M1
+yT-DNcQ-yDXEP8k1wz-DNf39-f39-c8-wzXUP8M1yT-DNcQ-yDXEP8k1wz-DNf39-f39-c8-wzXU
+P8M1yT-DNcQ-yDXEP8k1wz-DNf39-f39-c8-wzXEP8g1xD-DNck-wzXEP8M1wz-ENcM-xDXDP8k1
+-f39-f39yT-DNcQ-yDXEP8M1yT-DNcQ-wzXDP8Q1wz-ENcM-yTX9-f39-f3JP8M1xD-INcQ-wzXJ
+P8M1xD-DNcM-xDXDP8Q1wz-JNf39-f39-ck-wzXEP8g1xD-DNck-wzXEP8M1wz-ENcM-xDXDP8k1
+-f39-f39yT-DNcQ-yDXEP8M1yT-DNcQ-wzXDP8Q1wz-ENcM-yTX9-f39-f3JP8M1xD-INcQ-wzXJ
+P8M1xD-DNcM-xDXDP8Q1wz-JNf39-f39-ck-wzXJP8M1xD-TNcQ-wzXOP8Q1wz-DNf3T-gCyUf3b
+Nf39-ds-wzXJP8M1xD-TNcQ-wzXOP8Q1wz-DNf3TJv3bNf39-ds-wzXJP8M1xD-TNcQ-wzXOP8Q1
+wz-DNf3TJv3bNf39-ds-wzXJP8M1xD-TNcQ-wzXOP8Q1wz-DNf3TJv3bNf39-ds-wzXJP8M1xD-T
+NcQ-wzXOP8Q1wz-DNf3TJv3bNf39-eA-zjXEP8M1yT-DNcQ-wzXOP8Q1wz-ONf3IJv3bNf39-eA-
+zjXEP8M1yT-DNcQ-wzXOP8Q1wz-ONf3IJv3bNf39-eA-zjXEP8M1yT-DNcQ-wzXOP8Q1wz-ONf3I
+Jv3bNf39-eA-zjXEP8M1yT-DNcQ-wzXOP8Q1wz-ONf3IJv3bNf39-eA-zjXEP8M1yT-DNcQ-wzXO
+P8Q1wz-ONf3IJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1
+-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39
+-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39
+-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39
+zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m
+-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3b
+Nf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9
+-f39-f3PJv3bNf39-f39-c8m-ds1-f39-f39zyb92zX9-f39-f3PJv3bNf39-f39-c8m-ds1-f39
+-f39zyb92zX9-f39-fc-wTXRJv3bNf39-f399D-FNdAm-ds1-f39-f3wP8k10Cb92zX9-f39-e0-
+zDXQJv3bNf39-f396j-ONdEm-ds1-f39-f3nP9E10Sb92zX9-f39-eM-1DXSJv3bNf39-f394D-W
+NdMm-ds1-f39-f3dP9k10yb92zX9-f39-do-2zXUJv3bNf39-f391z-dNdUm-ds1-f39-f3TP_E1
+1Sb92zX9-f39-dA-4zXWJv3bNf39-f39zT-lNdcm-ds1-f39-f3KP_g11yb92zX9-f39-cY-6zXY
+Jv3bNf39-f39wz-tNdkm-ds1-f39-f3AP-A12Sb92zX9-f39_z-yNdom-ds1-f39-fc-9TXbJv3b
+Nf39-f30P-g12yb92zX9-f398T-6Ndwm-ds1-f39-e4--DXdJv3bNf39-f3rP-3BNd0m-ds1-f39
+-ec--cQ13ib92zX9-f395D-9xjXfJv3bNf39-f3hP-3JNd8m-ds1-f39-d4--cs14Cb92zX9-f39
+2j-9zjXhJv3bNf39-f3XP-3RNeEm-ds1-f39-dU--dI14ib92zX9-f391D-90jXjJv3bNf39-f3U
+P-3SNeMm-ds1-f39-dQ--dE15Cb92zX9-f391D-90DXlJv3bNf39-f3VP-3PNeUm-ds1-f39-dY-
+-c015ib92zX9-f391z-9yzXnJv3bNf39-f3YP-3KNecm-ds1-f39-dk--cg1-f39-f394z-9xjX9
+-f39-f3lP-3ENf39-f39-ec--cM1-f39-f396T-9wDX9-f39-f3rP-w1-f39-f397T-7Nf39-f39
+-e4-_TX9-f39-f3vP-g1-f39-f397z-5Nf39-f39-e0-_jX9-f39-f3tP-o1-f39-f397D-8Nf39
+-f39-es--DX9-f39-f3qP-01-f39-f396j-9wDX9-f39-f3oP-3BNf39-f39-eg--cE1-f39-f39
+5z-9wzX9-f39-f3mP-3DNf39-f39-eU--cQ1-f39-f395T-9xTX9-f39-f3jP-3GNf39-f39-eM-
+-cY1-f39-f394z-9xzX9-f39-f3jP_M1wD-dNf39-f39-eQ-4jXCP9s1-f39-f395j-gNcQ-2jX9
+-f39-f3nP901xz-YNf39-f39-ek-2zXJP9Y1-f39-f396z-YNcw-1TX9-f39-f3sP9Y1zj-TNf39
+-f39-e4-1DXQP9E1-f39-f397z-SNdM-0DX9-f39-f3wP9A11j-NNf39-f39-fI-zjXYP8s1-f39
+-f399D-LNds-yjX9-f39-f31P8k13T-INf39-f39-fc-xjXgP8Y1-f39-f39_T-ENeI-xTX9-f39
+-f35P8M15D-DNf39-f39-fs-wDXnP8E1-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39-f39
+-f39-f39-f39-f39-f39-f39-f39-f39-f390wAAAAAAAAAB
 :: main.lua
---[[pod_format="raw",created="2025-03-06 13:32:00",modified="2025-03-26 12:41:47",revision=1969]]
+--[[pod_format="raw",created="2025-03-06 13:32:00",modified="2025-03-26 23:55:09",revision=1977]]
+--title "Relex Game"
+--author "Sugarvoid"
 
 include "clock.lua"
 include "functions.lua"
@@ -666,7 +742,7 @@ function get_average(times)
 	return average
 end
 :: square.lua
---[[pod_format="raw",created="2025-03-06 13:39:42",modified="2025-03-26 12:41:47",revision=1764]]
+--[[pod_format="raw",created="2025-03-06 13:39:42",modified="2025-03-26 23:55:09",revision=1772]]
 
 SQUARE_W = 35
 SQUARE_H = 35
@@ -808,11 +884,11 @@ end
 
 :: .info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTA2IDEzOjMyOjMzIixtb2RpZmllZD0iMjAyNS0w
-My0yNiAxMjo0MTo0NyIscnVudGltZT0xNix3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
-IzU1Iix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJzcXVhcmUubHVhIzk2Iix3b3Jrc3Bh
-Y2VfaW5kZXg9MX0se2xvY2F0aW9uPSJmdW5jdGlvbnMubHVhIzEiLHdvcmtzcGFjZV9pbmRleD0x
-fSx7bG9jYXRpb249ImxhYmVsLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJj
-bG9jay5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jr
-c3BhY2VfaW5kZXg9Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7
-bG9jYXRpb249InNmeC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
+My0yNiAyMzo1NTowOSIscnVudGltZT0xNix3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
+IzIiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249InNxdWFyZS5sdWEjMSIsd29ya3NwYWNl
+X2luZGV4PTF9LHtsb2NhdGlvbj0iZnVuY3Rpb25zLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0s
+e2xvY2F0aW9uPSJsYWJlbC5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iY2xv
+Y2subHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3Nw
+YWNlX2luZGV4PTJ9LHtsb2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xv
+Y2F0aW9uPSJzZngvMC5zZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
 :: [eoc]
