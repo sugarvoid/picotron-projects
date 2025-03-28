@@ -4,34 +4,34 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMTo0OTowMCIscmV2aXNpb249NDE1XV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
+My0yOCAyMTo1NTowMCIscmV2aXNpb249NDMxXV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAynk9MCx6b29tPTh9LD4AQAAH0AcE
 AC-wzjkAHC-w8DEA------------------------------------------------------------
 ----plBtPTh9fQ==
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMTo0OTowMCJdXQ==
+My0yOCAyMTo1NTowMSJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMTo0OTowMCIscmV2aXNpb249MzkzXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+My0yOCAyMTo1NTowMCIscmV2aXNpb249NDA5XV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMTo0OTowMCJdXQ==
+My0yOCAyMTo1NTowMSJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjQwIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMTo0OTowMCIscmV2aXNpb249Mzk0XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+My0yOCAyMTo1NTowMCIscmV2aXNpb249NDEwXV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
 -70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMTo0OTowMCJdXQ==
+My0yOCAyMTo1NTowMSJdXQ==
 :: button.lua
---[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-28 21:49:00",revision=371]]
+--[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-28 21:55:00",revision=390]]
 
 button = {}
 button.__index = button
@@ -66,6 +66,7 @@ function button:was_clicked()
 end
 
 function button:draw()
+		rectfill(self.x, self.y, self.x + self.w,self.y + self.h, self.col)
     rect(self.x, self.y, self.x + self.w,self.y + self.h, self.col)
     --if self.callback == accept_deal then
         print(self.text, self.x + 8, self.y + 22, self.txt_col)
@@ -73,7 +74,7 @@ function button:draw()
       --  print(self.text, self.x + 8, self.y + 22, 12)
     --end
     if self.is_hovered then
-        rect(self.x, self.y, self.x + self.w, self.y + self.h, 12)
+        rect(self.x, self.y, self.x + self.w, self.y + self.h, 7)
     end
 end
 
@@ -89,7 +90,7 @@ function is_colliding(m_x, m_y, box)
 end
 
 :: case.lua
---[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-28 21:49:00",revision=400]]
+--[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-28 21:55:00",revision=416]]
 
 function show_case_value(c)
     print("Case " .. c.cover_num .. " had", 185, 140, FONT_COLOR, false, 1, true)
@@ -215,7 +216,7 @@ function is_colliding(m_x, m_y, box)
     end
 end
 :: main.lua
---[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-28 21:49:00",revision=610]]
+--[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-28 21:55:00",revision=629]]
 
 
 
@@ -835,7 +836,7 @@ end
 
 
 :: topbar.lua
---[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-28 21:49:00",revision=380]]
+--[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-28 21:55:00",revision=396]]
 
 local top_bar = {
     x = 0,
@@ -870,11 +871,11 @@ NzAxMDYwNjA2MDYwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAx
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA2MDYwNjA2MDEwNzA3MDcwNzAxMDcwNzA3MDcwMTAxMDYw
 MTAxMDYwMTA3MDEwMTA3MDEwNzAxMDEwNzAxMDEwNjA2MDYwNjAxMDcwNzA3MDcwMTA3MDcwNzA3
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEw
-MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjggMjE6NDk6MDAiLHJ1bnRpbWU9MTYsd29y
-a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSM0MjUiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9j
-YXRpb249InRvcGJhci5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iY2FzZS5s
-dWEjNDQiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImJ1dHRvbi5sdWEjMjIiLHdvcmtz
-cGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNlX2luZGV4PTJ9LHts
-b2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xvY2F0aW9uPSJzZngvMC5z
-ZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
+MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjggMjE6NTU6MDEiLHJ1bnRpbWU9MTYsd29y
+a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0
+aW9uPSJ0b3BiYXIubHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImNhc2UubHVh
+IzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImJ1dHRvbi5sdWEjNDMiLHdvcmtzcGFj
+ZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNlX2luZGV4PTJ9LHtsb2Nh
+dGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xvY2F0aW9uPSJzZngvMC5zZngi
+LHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
 :: [eoc]
