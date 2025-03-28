@@ -4,39 +4,39 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMToyNDo1OSIscmV2aXNpb249MzgwXV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
+My0yOCAyMTo0OTowMCIscmV2aXNpb249NDE1XV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAynk9MCx6b29tPTh9LD4AQAAH0AcE
 AC-wzjkAHC-w8DEA------------------------------------------------------------
 ----plBtPTh9fQ==
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMToyNDo1OSJdXQ==
+My0yOCAyMTo0OTowMCJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMToyNDo1OSIscmV2aXNpb249MzU4XV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+My0yOCAyMTo0OTowMCIscmV2aXNpb249MzkzXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMToyNDo1OSJdXQ==
+My0yOCAyMTo0OTowMCJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjQwIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMToyNDo1OSIscmV2aXNpb249MzU5XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+My0yOCAyMTo0OTowMCIscmV2aXNpb249Mzk0XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
 -70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOCAyMToyNDo1OSJdXQ==
+My0yOCAyMTo0OTowMCJdXQ==
 :: button.lua
---[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-28 21:24:59",revision=325]]
+--[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-28 21:49:00",revision=371]]
 
 button = {}
 button.__index = button
 
-function button.new(str, pos, callback, col, idx)
+function button.new(str, pos, callback, col)
     local _b = setmetatable({}, button)
     _b.text = str
     _b.x = pos[1]
@@ -47,12 +47,14 @@ function button.new(str, pos, callback, col, idx)
     _b.b_color = 1
     _b.col = col
     _b.hovered = false
+    _b.txt_col = 7
     _b.index = idx
     return _b
 end
 
 function button:update()
-    self.is_hovered = self.index == offer_index
+		self.is_hovered = is_colliding(mx, my, self)
+    --self.is_hovered = self.index == offer_index
 end
 
 function button:get_value()
@@ -65,11 +67,11 @@ end
 
 function button:draw()
     rect(self.x, self.y, self.x + self.w,self.y + self.h, self.col)
-    if self.callback == accept_deal then
-        print(self.text, self.x + 8, self.y + 22, 12)
-    else
-        print(self.text, self.x + 8, self.y + 22, 12)
-    end
+    --if self.callback == accept_deal then
+        print(self.text, self.x + 8, self.y + 22, self.txt_col)
+    --else
+      --  print(self.text, self.x + 8, self.y + 22, 12)
+    --end
     if self.is_hovered then
         rect(self.x, self.y, self.x + self.w, self.y + self.h, 12)
     end
@@ -87,7 +89,7 @@ function is_colliding(m_x, m_y, box)
 end
 
 :: case.lua
---[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-28 21:24:59",revision=362]]
+--[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-28 21:49:00",revision=400]]
 
 function show_case_value(c)
     print("Case " .. c.cover_num .. " had", 185, 140, FONT_COLOR, false, 1, true)
@@ -130,6 +132,9 @@ function case.new(num, value, pos, spot)
 end
 
 function case:update()
+
+	self.is_hovered = is_colliding(mx, my, self)
+
 	if self.is_hovered then
 		self.col = case_hover_col
 	else
@@ -210,7 +215,7 @@ function is_colliding(m_x, m_y, box)
     end
 end
 :: main.lua
---[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-28 21:24:59",revision=560]]
+--[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-28 21:49:00",revision=610]]
 
 
 
@@ -245,7 +250,18 @@ game_state = GAMESTATES.title
 
 mx, my, mb = nil, nil, nil
 
+
+
+
 function _init()
+	btn_deal = button.new("ACCEPT", { 20, 50 }, accept_deal, 27, 1)
+btn_no_deal = button.new("REJECT", { 95, 50 }, reject_deal, 24, 2)
+
+ offer_btns = {}
+
+add(offer_btns, btn_deal)
+add(offer_btns, btn_no_deal)
+
 	vid(3)
 	--window{
      --       width      = 250,
@@ -324,10 +340,18 @@ function on_mouse_click(x,y)
 			
 		--end
 	elseif game_state == GAMESTATES.offer then
-		if lbl_play.hovered then
-			lbl_play:do_func()
-			return
+		
+		for b in all(offer_btns) do
+			if b.is_hovered then
+				b:was_clicked()
+				return
+			end
 		end
+	
+		--if lbl_play.hovered then
+			--lbl_play:do_func()
+			--return
+		--end
 		
 	elseif game_state == GAMESTATES.deal_accepted then
 		--if lbl_play.hovered then
@@ -574,8 +598,6 @@ function reject_deal()
     end
 end
 
-local btn_deal = button.new("ACCEPT", { 20, 50 }, accept_deal, 6, 1)
-local btn_no_deal = button.new("REJECT", { 95, 50 }, reject_deal, 2, 2)
 
 
 
@@ -610,15 +632,15 @@ function update_pick_case()
         end
     end
 
-    for b in all(cases) do
-        b:update()
+    for c in all(cases) do
+        c:update()
     end
     
-   for c in all(cases) do
-			c.is_hovered = is_colliding(mx, my, c)
+  -- for c in all(cases) do
+			--c.is_hovered = is_colliding(mx, my, c)
 				--l:was_clicked()
 			--end
-		end
+		--end
 end
 
 function update_offer()
@@ -813,7 +835,7 @@ end
 
 
 :: topbar.lua
---[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-28 21:24:59",revision=345]]
+--[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-28 21:49:00",revision=380]]
 
 local top_bar = {
     x = 0,
@@ -848,11 +870,11 @@ NzAxMDYwNjA2MDYwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAx
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA2MDYwNjA2MDEwNzA3MDcwNzAxMDcwNzA3MDcwMTAxMDYw
 MTAxMDYwMTA3MDEwMTA3MDEwNzAxMDEwNzAxMDEwNjA2MDYwNjAxMDcwNzA3MDcwMTA3MDcwNzA3
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEw
-MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjggMjE6MjQ6NTkiLHJ1bnRpbWU9MTYsd29y
-a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSM4OSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2Nh
-dGlvbj0idG9wYmFyLmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJjYXNlLmx1
-YSMyNiIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iYnV0dG9uLmx1YSM0NCIsd29ya3Nw
-YWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jrc3BhY2VfaW5kZXg9Mn0se2xv
-Y2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7bG9jYXRpb249InNmeC8wLnNm
-eCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
+MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjggMjE6NDk6MDAiLHJ1bnRpbWU9MTYsd29y
+a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSM0MjUiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9j
+YXRpb249InRvcGJhci5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iY2FzZS5s
+dWEjNDQiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImJ1dHRvbi5sdWEjMjIiLHdvcmtz
+cGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNlX2luZGV4PTJ9LHts
+b2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xvY2F0aW9uPSJzZngvMC5z
+ZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
 :: [eoc]
