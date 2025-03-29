@@ -4,33 +4,33 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxOTo0NDoyOCIscmV2aXNpb249ODIzXV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
+My0yOSAyMTozMjoxMSIscmV2aXNpb249ODM1XV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAynk9MCx6b29tPTh9LD4AQAAH0AcE
 AC-wzjkAHC-w8DEA------------------------------------------------------------
 ----plBtPTh9fQ==
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxOTo0NDoyOCJdXQ==
+My0yOSAyMTozMjoxMiJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxOTo0NDoyOCIscmV2aXNpb249ODAwXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+My0yOSAyMTozMjoxMSIscmV2aXNpb249ODEyXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxOTo0NDoyOCJdXQ==
+My0yOSAyMTozMjoxMiJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjQwIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxOTo0NDoyOCIscmV2aXNpb249ODAzXV1sejQA3QAAALYKAAD-MHB4dQADKAAABAAED0AQ
+My0yOSAyMTozMjoxMSIscmV2aXNpb249ODE1XV1sejQA3QAAALYKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
 -70f-wEArPMuyA9AAAoGMA--AA0PKA8zD0n9KwANIP0rDg0u-SrwcA9AAA8QDwMwDzoPJA8fDxwP
 Ew8RDw79KWD9KW79KSAAP0D9sAoAcB--AQD-1lD-----3Q==
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxOTo0NDoyOCJdXQ==
+My0yOSAyMTozMjoxMiJdXQ==
 :: button.lua
 --[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-29 17:45:29",revision=606]]
 
@@ -87,12 +87,7 @@ function is_colliding(m_x, m_y, box)
 end
 
 :: case.lua
---[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-29 19:44:28",revision=862]]
-
---function show_case_va4lue(c)
-  --  print("Case " .. c.cover_num .. " had", 185, 140, FONT_COLOR, false, 1, true)
-   -- print(c.inside_num, 185, 40, 11, FONT_COLOR)
---end
+--[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-29 21:32:11",revision=874]]
 
 case = {}
 case.__index = case
@@ -101,26 +96,22 @@ case_col = 6
 case_hover_col = 9 
 
 function case.new(num, value, pos)
-    local _c = setmetatable({}, case)
-    _c.number = num
-    _c.value = value
-    _c.x = pos.x
-    _c.y = pos.y
-    --_c.home_x = pos.x
-    --_c.home_y = pos.y
-    _c.w = 20
-    _c.open_t = 500
-    _c.h = 15
-    _c.hovered = false
-    _c.picked = false
-   -- _c.spot = spot
-    _c.visable = true
-    _c.move_t = 0
-    _c.move_p = 121
-    _c.end_loc = { 200, 60 }
-    
-  	_c.col = 6
-  	_c.hover_col = 9  
+	local _c = setmetatable({}, case)
+   _c.number = num
+   _c.value = value
+   _c.x = pos.x
+   _c.y = pos.y
+   _c.w = 20
+   _c.open_t = 500
+   _c.h = 15
+   _c.hovered = false
+   _c.picked = false
+   _c.visable = true
+   _c.move_t = 0
+   _c.move_p = 121
+   _c.end_loc = { 200, 60 }
+   _c.col = 6
+	_c.hover_col = 9  
   
     if num <= 9 then
         _c.txt_pos = { _c.x + 8, _c.y + 6 }
@@ -597,7 +588,7 @@ CsI1-f39-foKwDX9-egKwjX9-f39_grANf396ArCNf39-f36CsA1-f3oCsI1-f39-foKwDX9-egK
 wjX9-f39_grANf396ArCNf39-f36CsA1-f3oCsI1-f39-foKwDX9-egKwjX9-f39_grANf396ArC
 Nf39-f36CsA1-f3oCsI1-f39-foKwDX9-egK-f39-f39-f39-f39-f393gAAAAAAAAAB
 :: main.lua
---[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-29 19:44:28",revision=1116]]
+--[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-29 21:32:11",revision=1129]]
 
 include "case.lua"
 include "button.lua"
@@ -631,9 +622,9 @@ col_6 = 155 - 25
 
 function _init()
 	current_offer = 0
-player_case = nil
-show_values = false
-cases_to_pick = 7
+	player_case = nil
+	show_values = false
+	cases_to_pick = 7
 	round = 0
 	last_case = nil
 	can_player_click = true
@@ -642,27 +633,20 @@ cases_to_pick = 7
 	is_case_opening = false
 	btn_deal = button.new("ACCEPT", { 20, 50 }, accept_deal, 27, 1)
 	btn_no_deal = button.new("REJECT", { 95, 50 }, reject_deal, 24, 2)
-
- offer_btns = {}
-
-add(offer_btns, btn_deal)
-add(offer_btns, btn_no_deal)
+ 	offer_btns = {}
+	add(offer_btns, btn_deal)
+	add(offer_btns, btn_no_deal)
 
 	vid(3)
-	--window{
-            --width      = 240,
-            --height     = 135,
-         --   resizeable = false,
-          --  title      = "Accept or Reject"
-        --}
 end
 
 function _update()
-    top_bar:update()
-    
-  if not is_case_opening then
+	top_bar:update()
+	
+	if not is_case_opening then
     	mx,my,mb = mouse()
    end
+   
    if mb == 1 then
 		if m_delay == 0 then
 			on_mouse_click(mx, my)
@@ -673,84 +657,71 @@ function _update()
 		m_delay = 0
   	end
    
-  can_player_click = not is_case_opening
+   can_player_click = not is_case_opening
 	
-    if game_state == GAMESTATES.title then
-
-        update_title()
-    elseif game_state == GAMESTATES.pick_case then
-        update_pick_case()
-    elseif game_state == GAMESTATES.offer then
-        update_offer()
-    elseif game_state == GAMESTATES.deal_accepted then
-        update_deal_accepted()
-    elseif game_state == GAMESTATES.game_over then
-        update_game_over()
-    end
+   if game_state == GAMESTATES.title then
+		update_title()
+   elseif game_state == GAMESTATES.pick_case then
+      update_pick_case()
+   elseif game_state == GAMESTATES.offer then
+      update_offer()
+   elseif game_state == GAMESTATES.deal_accepted then
+      update_deal_accepted()
+   elseif game_state == GAMESTATES.game_over then
+      update_game_over()
+   end
 end
 
 function _draw()
 	cls()
 	if game_state == GAMESTATES.title then
-        draw_title()
-    elseif game_state == GAMESTATES.pick_case then
-        draw_pick_case()
-        
-    elseif game_state == GAMESTATES.offer then
-        draw_offer()
-        draw_border()
-    elseif game_state == GAMESTATES.deal_accepted then
-        draw_deal_accepted()
-    elseif game_state == GAMESTATES.game_over then
-        draw_game_over()
-    end
+   	draw_title()
+   elseif game_state == GAMESTATES.pick_case then
+      draw_pick_case()
+   elseif game_state == GAMESTATES.offer then
+      draw_offer()
+      draw_border()
+   elseif game_state == GAMESTATES.deal_accepted then
+      draw_deal_accepted()
+   elseif game_state == GAMESTATES.game_over then
+      draw_game_over()
+   end
     
    if not is_case_opening then
-    spr(1, mx-2, my-2)
-    end
-    --print(tostr(is_case_opening), 0, 0, 8)
+   	spr(1, mx-2, my-2)
+   end
 end
 
 
 function on_mouse_click(x,y)
-
 	if is_case_opening then
-		--notify("get out of here")
 		return
 	end
 
 	--notify("click on " .. x .. "," .. y)
 	if game_state == GAMESTATES.title then
-		
 	elseif game_state == GAMESTATES.pick_case then
-	if can_player_click then
-		for c in all(cases) do
+		if can_player_click then
+			for c in all(cases) do
 				if not c.picked and c.is_hovered then
-                    can_player_click = false
-                    c:was_clicked()
-                    update_topbar(cases_to_pick)
-                    return
+            	can_player_click = false
+               c:was_clicked()
+               update_topbar(cases_to_pick)
+               return
             end
-            end
-            end
+          end
+      end
 	elseif game_state == GAMESTATES.offer then
-		
 		for b in all(offer_btns) do
 			if b.is_hovered then
 				b:was_clicked()
 				return
 			end
 		end
-		
 	elseif game_state == GAMESTATES.deal_accepted then		
 	elseif game_state == GAMESTATES.game_over then
 	end
 end
-
-
-
-
---offer_index = 1
 
 
 cases = {}
@@ -787,13 +758,6 @@ case_manager = {
         self.inside_num = case.value
     end,
 }
-
---case_spots = {
- --   { 0, 0 }, { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 },
-   -- { 1, 0 }, { 1, 1 }, { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 },
-   -- { 2, 0 }, { 2, 1 }, { 2, 2 }, { 2, 3 }, { 2, 4 }, { 2, 5 },
-   -- { 3, 0 }, { 3, 1 }, { 3, 2 }, { 3, 3 }, { 3, 4 }, { 3, 5 }
---}
 
 case_pos = {
     { x = col_1, y = row_1_y },
@@ -1042,18 +1006,14 @@ function draw_pick_case()
 		return
 	end
 	
-
-    for _, r in ipairs(cases) do
-        if not r.picked or 4 == 4 then
-            r:draw()
-        end
-    end
+   for _, r in ipairs(cases) do
+   	if not r.picked or 4 == 4 then
+      	r:draw()
+      end
+   end
 
     draw_display_values()
-
     draw_border()
-
-    
 end
 
 function draw_display_values()
@@ -1135,7 +1095,7 @@ end
 
 
 :: topbar.lua
---[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-29 19:44:28",revision=784]]
+--[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-29 21:32:11",revision=797]]
 
 top_bar = {
     x = 0,
@@ -1169,9 +1129,9 @@ NzAxMDYwNjA2MDYwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAx
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA2MDYwNjA2MDEwNzA3MDcwNzAxMDcwNzA3MDcwMTAxMDYw
 MTAxMDYwMTA3MDEwMTA3MDEwNzAxMDEwNzAxMDEwNjA2MDYwNjAxMDcwNzA3MDcwMTA3MDcwNzA3
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEw
-MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjkgMTk6NDQ6MjgiLHJ1bnRpbWU9MTYsd29y
-a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSM1MjYiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9j
-YXRpb249ImNhc2UubHVhIzQzIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJ0b3BiYXIu
+MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjkgMjE6MzI6MTIiLHJ1bnRpbWU9MTYsd29y
+a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSM0MjMiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9j
+YXRpb249ImNhc2UubHVhIzI4Iix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJ0b3BiYXIu
 bHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNl
 X2luZGV4PTJ9LHtsb2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xvY2F0
 aW9uPSJzZngvMC5zZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
