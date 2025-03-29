@@ -4,32 +4,33 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxODozMzoyNCIscmV2aXNpb249NzMyXV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
+My0yOSAxOToyMzozNSIscmV2aXNpb249ODA0XV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAynk9MCx6b29tPTh9LD4AQAAH0AcE
 AC-wzjkAHC-w8DEA------------------------------------------------------------
 ----plBtPTh9fQ==
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxODozMzoyNSJdXQ==
+My0yOSAxOToyMzozNSJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxODozMzoyNCIscmV2aXNpb249NzEwXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+My0yOSAxOToyMzozNSIscmV2aXNpb249NzgxXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxODozMzoyNSJdXQ==
+My0yOSAxOToyMzozNSJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjQwIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxODozMzoyNCIscmV2aXNpb249NzExXV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+My0yOSAxOToyMzozNSIscmV2aXNpb249Nzg0XV1sejQA3QAAALYKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
--70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
+-70f-wEArPMuyA9AAAoGMA--AA0PKA8zD0n9KwANIP0rDg0u-SrwcA9AAA8QDwMwDzoPJA8fDxwP
+Ew8RDw79KWD9KW79KSAAP0D9sAoAcB--AQD-1lD-----3Q==
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxODozMzoyNSJdXQ==
+My0yOSAxOToyMzozNSJdXQ==
 :: button.lua
 --[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-29 17:45:29",revision=606]]
 
@@ -86,7 +87,7 @@ function is_colliding(m_x, m_y, box)
 end
 
 :: case.lua
---[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-29 18:33:24",revision=767]]
+--[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-29 19:23:35",revision=843]]
 
 --function show_case_va4lue(c)
   --  print("Case " .. c.cover_num .. " had", 185, 140, FONT_COLOR, false, 1, true)
@@ -176,6 +177,7 @@ function case:was_clicked()
       goto_next_round()
     	self.update=function(self) end -- prevent checkinh for mouse
     	self.col = 12
+    	sfx(0)
    	return
    else
 		self.visable = false
@@ -223,7 +225,7 @@ function is_colliding(m_x, m_y, box)
     end
 end
 :: main.lua
---[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-29 18:33:24",revision=1005]]
+--[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-29 19:23:35",revision=1095]]
 
 include "case.lua"
 include "button.lua"
@@ -240,6 +242,8 @@ GAMESTATES = {
     game_over = 5,
     deal_accepted = 6
 }
+
+_start_y = 18
 
 function _init()
 	current_offer = 0
@@ -271,8 +275,10 @@ end
 
 function _update()
     top_bar:update()
-    mx,my,mb = mouse()
     
+  if not is_case_opening then
+    	mx,my,mb = mouse()
+   end
    if mb == 1 then
 		if m_delay == 0 then
 			on_mouse_click(mx, my)
@@ -314,7 +320,10 @@ function _draw()
     elseif game_state == GAMESTATES.game_over then
         draw_game_over()
     end
+    
+   if not is_case_opening then
     spr(1, mx-2, my-2)
+    end
     --print(tostr(is_case_opening), 0, 0, 8)
 end
 
@@ -373,10 +382,10 @@ end
 
 
 --opening_case_t = 0
-row_1_y = 15 + 6
-row_2_y = 35 + 6
-row_3_y = 55 + 6
-row_4_y = 75 + 6
+row_1_y = 15 + 16
+row_2_y = 35 + 16
+row_3_y = 55 + 16
+row_4_y = 75 + 16
 
 col_1 = 5
 col_2 = 30
@@ -405,6 +414,7 @@ case_manager = {
         if self.t >= 90 then
             if cases_to_pick == 0 and round <= 8 then
                 game_state = GAMESTATES.offer
+                is_case_opening = false
                 offer_index = 1
                 top_bar:set_text("BANKER'S OFFER")
                 current_offer = get_offer()
@@ -704,13 +714,13 @@ end
 --end
 
 function update_deal_accepted()
-    if btnp(5) then
+    if key("space") then
         reset_game()
     end
 end
 
 function update_game_over()
-    if btnp(5) then
+    if key("space") then
         reset_game()
     end
 end
@@ -766,17 +776,16 @@ function draw_pick_case()
 end
 
 function draw_display_values()
-    local _start_y = 13
+    
     rectfill(156, 9, 250, 133, 0)
-
-
+    
     for i = 1, 12 do
         if game_values[i].in_play then
             col = 12
         else
             col = 5
         end
-        print("$" .. comma_value(game_values[i].value), 36 + 123, _start_y + (i - 1) * 9, col)
+        print("$" .. comma_value(game_values[i].value), 37 + 123, _start_y + (i - 1) * 9, col)
     end
 
     for i2 = 1, 12 do
@@ -785,7 +794,7 @@ function draw_display_values()
         else
             col = 5
         end
-        print("$" .. comma_value(game_values[i2 + 12].value), 63 + 123, _start_y + (i2 - 1) * 9, col, false, 1, true)
+        print("$" .. comma_value(game_values[i2 + 12].value), 65 + 123, _start_y + (i2 - 1) * 9, col, false, 1, true)
     end
 end
 
@@ -797,10 +806,6 @@ function draw_offer()
     btn_deal:draw()
     btn_no_deal:draw()
     draw_display_values()
-
-
-    --print("Press O to select", 3, 127, FONT_COLOR)
-
 end
 
 function draw_game_over()
@@ -849,7 +854,7 @@ end
 
 
 :: topbar.lua
---[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-29 18:33:24",revision=692]]
+--[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-29 19:23:35",revision=765]]
 
 top_bar = {
     x = 0,
@@ -883,10 +888,10 @@ NzAxMDYwNjA2MDYwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAx
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA2MDYwNjA2MDEwNzA3MDcwNzAxMDcwNzA3MDcwMTAxMDYw
 MTAxMDYwMTA3MDEwMTA3MDEwNzAxMDEwNzAxMDEwNjA2MDYwNjAxMDcwNzA3MDcwMTA3MDcwNzA3
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEw
-MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjkgMTg6MzM6MjUiLHJ1bnRpbWU9MTYsd29y
-a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSMyMiIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2Nh
-dGlvbj0iY2FzZS5sdWEjMTMiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249InRvcGJhci5s
-dWEjMjIiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNl
+MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjkgMTk6MjM6MzUiLHJ1bnRpbWU9MTYsd29y
+a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSMxNjAiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9j
+YXRpb249ImNhc2UubHVhIzQzIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJ0b3BiYXIu
+bHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNl
 X2luZGV4PTJ9LHtsb2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xvY2F0
 aW9uPSJzZngvMC5zZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
 :: [eoc]
