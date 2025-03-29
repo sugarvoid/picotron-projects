@@ -4,34 +4,34 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxNjo1OToxNSIscmV2aXNpb249NTY3XV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
+My0yOSAxODozMzoyNCIscmV2aXNpb249NzMyXV1sejQAjAAAABoxAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAynk9MCx6b29tPTh9LD4AQAAH0AcE
 AC-wzjkAHC-w8DEA------------------------------------------------------------
 ----plBtPTh9fQ==
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxNjo1OToxNSJdXQ==
+My0yOSAxODozMzoyNSJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjM5Iixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxNjo1OToxNSIscmV2aXNpb249NTQ1XV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+My0yOSAxODozMzoyNCIscmV2aXNpb249NzEwXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxNjo1OToxNSJdXQ==
+My0yOSAxODozMzoyNSJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM4OjQwIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxNjo1OToxNSIscmV2aXNpb249NTQ2XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+My0yOSAxODozMzoyNCIscmV2aXNpb249NzExXV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
 -70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixtb2RpZmllZD0iMjAyNS0w
-My0yOSAxNjo1OToxNSJdXQ==
+My0yOSAxODozMzoyNSJdXQ==
 :: button.lua
---[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-29 16:59:15",revision=530]]
+--[[pod_format="raw",created="2025-03-27 23:46:57",modified="2025-03-29 17:45:29",revision=606]]
 
 button = {}
 button.__index = button
@@ -54,7 +54,6 @@ end
 
 function button:update()
 	self.is_hovered = is_colliding(mx, my, self)
-    --self.is_hovered = self.index == offer_index
 end
 
 function button:get_value()
@@ -68,14 +67,11 @@ end
 function button:draw()
  	rectfill(self.x, self.y, self.x + self.w,self.y + self.h, self.col)
 	rect(self.x, self.y, self.x + self.w,self.y + self.h, self.col)
-    --if self.callback == accept_deal then
    print(self.text, self.x + 8, self.y + 22, self.txt_col)
-    --else
-      --  print(self.text, self.x + 8, self.y + 22, 12)
-    --end
-    if self.is_hovered then
-        rect(self.x, self.y, self.x + self.w, self.y + self.h, 7)
-    end
+
+   if self.is_hovered then
+   	rect(self.x, self.y, self.x + self.w, self.y + self.h, 7)
+   end
 end
 
 function is_colliding(m_x, m_y, box)
@@ -90,12 +86,12 @@ function is_colliding(m_x, m_y, box)
 end
 
 :: case.lua
---[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-29 16:59:15",revision=577]]
+--[[pod_format="raw",created="2025-03-27 23:46:24",modified="2025-03-29 18:33:24",revision=767]]
 
-function show_case_value(c)
-    print("Case " .. c.cover_num .. " had", 185, 140, FONT_COLOR, false, 1, true)
-    print(c.inside_num, 185, 40, 11, FONT_COLOR)
-end
+--function show_case_va4lue(c)
+  --  print("Case " .. c.cover_num .. " had", 185, 140, FONT_COLOR, false, 1, true)
+   -- print(c.inside_num, 185, 40, 11, FONT_COLOR)
+--end
 
 case = {}
 case.__index = case
@@ -103,20 +99,20 @@ case.__index = case
 case_col = 6
 case_hover_col = 9 
 
-function case.new(num, value, pos, spot)
+function case.new(num, value, pos)
     local _c = setmetatable({}, case)
     _c.number = num
     _c.value = value
     _c.x = pos.x
     _c.y = pos.y
-    _c.home_x = pos.x
-    _c.home_y = pos.y
+    --_c.home_x = pos.x
+    --_c.home_y = pos.y
     _c.w = 20
     _c.open_t = 500
     _c.h = 15
     _c.hovered = false
     _c.picked = false
-    _c.spot = spot
+   -- _c.spot = spot
     _c.visable = true
     _c.move_t = 0
     _c.move_p = 121
@@ -146,57 +142,61 @@ function case:update()
 
 		
     --self.is_hovered = self.spot[1] == selector_index[1] and self.spot[2] == selector_index[2]
-    if self.move_p < self.move_t then
-    	is_case_opening = true
-       	self.move_p = self.move_p + 1
-        self.x = lerp(self.x, self.end_loc[1], self.move_p / self.move_t)
-        self.y = lerp(self.y, self.end_loc[2], self.move_p / self.move_t)
+    --if self.move_p < self.move_t then
+    	--is_case_opening = true
+      -- 	self.move_p = self.move_p + 1
+        --self.x = lerp(self.x, self.end_loc[1], self.move_p / self.move_t)
+        --self.y = lerp(self.y, self.end_loc[2], self.move_p / self.move_t)
 
-        if self.number <= 9 then
-            self.txt_pos = { self.x + 8, self.y + 6 }
-        else
-            self.txt_pos = { self.x + 5, self.y + 6 }
-        end
+        --if self.number <= 9 then
+          --  self.txt_pos = { self.x + 8, self.y + 6 }
+        --else
+          --  self.txt_pos = { self.x + 5, self.y + 6 }
+        --end
 
-        if self.x == self.end_loc[1] and self.y == self.end_loc[2] then
-            self.visable = false
-            is_case_opening = false
+        --if self.x == self.end_loc[1] and self.y == self.end_loc[2] then
+            
+            --is_case_opening = false
       		--todo: prevent player from clicking a new case before current is ready
-            can_player_input = true
-            can_player_click = true
-        end
-    end
+           -- can_player_input = true
+            --can_player_click = true
+        --end
+   -- end
 end
 
 function case:was_clicked()
-    can_player_input = false
-    self.move_t = 120
-    self.open_t = 0
-    self.move_p = 0
+    --can_player_input = false
+    
+    --self.move_t = 120
+    --self.open_t = 0
+    --self.move_p = 0
     self.picked = true
 	if player_case == nil then
 		player_case = self
       goto_next_round()
-    	self.col = 11
-   return
-
+    	self.update=function(self) end -- prevent checkinh for mouse
+    	self.col = 12
+   	return
+   else
+		self.visable = false
    end
-	open_case(self)
+	--open_case(self)
 	cases_to_pick = clamp(0, cases_to_pick - 1, 6)
+	case_manager:reset(self)
+   update_game_value(self.value, false)
 
     
 end
 
 function case:draw()
     if self.visable then
-        rect(self.x, self.y, self.x + 20, self.y + 15, 14)
-        --if self.is_hovered then
-            rect(self.x, self.y, self.x + 20, self.y + 15, self.col)
-            print(self.number, self.txt_pos[1], self.txt_pos[2], self.col)
+    	rect(self.x, self.y, self.x + 20, self.y + 15, self.col)
+      print(self.number, self.txt_pos[1], self.txt_pos[2], self.col)
+    end
         --else
             --rect(self.x, self.y, self.x + 20, self.y + 15, 6)
             --print(self.number, self.txt_pos[1], self.txt_pos[2], 6)
-       end
+       --end
     ---else
         --if self.is_hovered then
             --rect(self.home_x, self.home_y, self.home_x + 20, self.home_y + 15, 4)
@@ -206,11 +206,11 @@ function case:draw()
     --end
 end
 
-function open_case(c)
-    can_player_input = false
-    case_manager:reset(c)
-    update_game_value(c.value, false)
-end
+--function open_case(c)
+  --  can_player_input = false
+   -- case_manager:reset(c)
+    --update_game_value(c.value, false)
+--end
 
 function is_colliding(m_x, m_y, box)
     if m_x < box.x + box.w and
@@ -223,28 +223,15 @@ function is_colliding(m_x, m_y, box)
     end
 end
 :: main.lua
---[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-29 16:59:15",revision=794]]
-
-
-
-
+--[[pod_format="raw",created="2025-03-27 22:38:39",modified="2025-03-29 18:33:24",revision=1005]]
 
 include "case.lua"
 include "button.lua"
-
-top_bar = include "topbar.lua"
-
+include "topbar.lua"
 
 FONT_COLOR = 9
-round = 0
-please_rename = { 6, 5, 4, 3, 2, 1, 1, 1, 0 }
-selector_index = { 0, 0 }
+PLEASE_RENAME = { 6, 5, 4, 3, 2, 1, 1, 1, 0 }
 BORDER_COLOR = 12
-can_player_input = true
-last_case = nil
-
-can_player_click = true
-
 GAMESTATES = {
     title = 0,
     pick_case = 1,
@@ -254,17 +241,19 @@ GAMESTATES = {
     deal_accepted = 6
 }
 
-game_state = GAMESTATES.title
-
-mx, my, mb = nil, nil, nil
-
-
-
-
 function _init()
-is_case_opening = false
+	current_offer = 0
+player_case = nil
+show_values = false
+cases_to_pick = 7
+	round = 0
+	last_case = nil
+	can_player_click = true
+	mx, my, mb = nil, nil, nil
+	game_state = GAMESTATES.title
+	is_case_opening = false
 	btn_deal = button.new("ACCEPT", { 20, 50 }, accept_deal, 27, 1)
-btn_no_deal = button.new("REJECT", { 95, 50 }, reject_deal, 24, 2)
+	btn_no_deal = button.new("REJECT", { 95, 50 }, reject_deal, 24, 2)
 
  offer_btns = {}
 
@@ -294,6 +283,7 @@ function _update()
 		m_delay = 0
   	end
    
+  can_player_click = not is_case_opening
 	
     if game_state == GAMESTATES.title then
 
@@ -325,7 +315,7 @@ function _draw()
         draw_game_over()
     end
     spr(1, mx-2, my-2)
-    print(tostr(player_case), 0, 0, 8)
+    --print(tostr(is_case_opening), 0, 0, 8)
 end
 
 
@@ -344,7 +334,7 @@ function on_mouse_click(x,y)
 		for c in all(cases) do
 			--if c.is_hovered then
 				if not c.picked and c.is_hovered then
-                    can_player_input = false
+                    --can_player_input = false
                     can_player_click = false
                     c:was_clicked()
                     update_topbar(cases_to_pick)
@@ -382,11 +372,11 @@ function on_mouse_click(x,y)
 end
 
 
-opening_case_t = 0
-row_1_y = 15 + 2
-row_2_y = 35 + 2
-row_3_y = 55 + 2
-row_4_y = 75 + 2
+--opening_case_t = 0
+row_1_y = 15 + 6
+row_2_y = 35 + 6
+row_3_y = 55 + 6
+row_4_y = 75 + 6
 
 col_1 = 5
 col_2 = 30
@@ -395,12 +385,9 @@ col_4 = 105 - 25
 col_5 = 130 - 25
 col_6 = 155 - 25
 
-current_offer = 0
-player_case = nil
-show_values = false
-cases_to_pick = 7
 
-offer_index = 1
+
+--offer_index = 1
 
 
 cases = {}
@@ -410,6 +397,8 @@ case_manager = {
     cover_num = 0,
     inside_num = 0,
     update = function(self)
+    		is_case_opening = self.t < 90
+    		
         if self.t < 90 then
             self.t = self.t + 1
         end
@@ -417,7 +406,7 @@ case_manager = {
             if cases_to_pick == 0 and round <= 8 then
                 game_state = GAMESTATES.offer
                 offer_index = 1
-                top_bar:set_text("Banker's Offer")
+                top_bar:set_text("BANKER'S OFFER")
                 current_offer = get_offer()
             else
                 if round <= 8 then
@@ -435,12 +424,12 @@ case_manager = {
     end,
 }
 
-case_spots = {
-    { 0, 0 }, { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 },
-    { 1, 0 }, { 1, 1 }, { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 },
-    { 2, 0 }, { 2, 1 }, { 2, 2 }, { 2, 3 }, { 2, 4 }, { 2, 5 },
-    { 3, 0 }, { 3, 1 }, { 3, 2 }, { 3, 3 }, { 3, 4 }, { 3, 5 }
-}
+--case_spots = {
+ --   { 0, 0 }, { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 },
+   -- { 1, 0 }, { 1, 1 }, { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 },
+   -- { 2, 0 }, { 2, 1 }, { 2, 2 }, { 2, 3 }, { 2, 4 }, { 2, 5 },
+   -- { 3, 0 }, { 3, 1 }, { 3, 2 }, { 3, 3 }, { 3, 4 }, { 3, 5 }
+--}
 
 case_pos = {
     { x = col_1, y = row_1_y },
@@ -573,7 +562,7 @@ end
 
 function goto_next_round()
     round = round + 1
-    cases_to_pick = please_rename[round]
+    cases_to_pick = PLEASE_RENAME[round]
     update_topbar(cases_to_pick)
     if round < 9 then
         game_state = GAMESTATES.pick_case
@@ -584,13 +573,13 @@ function setup_cases()
     cases = {}
     shuffle(case_values)
     for i = 1, 24 do
-        table.insert(cases, case.new(i, case_values[i], case_pos[i], case_spots[i]))
+        table.insert(cases, case.new(i, case_values[i], case_pos[i]))
     end
 end
 
 function start_game()
     setup_cases()
-    top_bar:set_text("Pick your case")
+    top_bar:set_text("PICK YOUR CASE")
     game_state = GAMESTATES.pick_case
 end
 
@@ -606,7 +595,7 @@ function reject_deal()
         round = round + 1
         for _, c in ipairs(cases) do
             if c.picked == false then
-                trace("last case #: " .. c.number .. ". This is round: " .. round)
+                notify("last case #: " .. c.number .. ". This is round: " .. round)
                 last_case = c
             end
         end
@@ -617,35 +606,34 @@ end
 
 
 function update_title()
-	
-    if btnp(4) then -- Gamepad (B)
+    if key("space") then
         start_game()
     end
 end
 
 function update_pick_case()
     case_manager:update()
-    if can_player_input then
-        if btnp(2) then
-            move_selector("up")
-        elseif btnp(3) then
-            move_selector("down")
-        elseif btnp(0) then
-            move_selector("left")
-        elseif btnp(1) then
-            move_selector("right")
-        end
+   -- if can_player_input then
+     --   if btnp(2) then
+       --     move_selector("up")
+      --  elseif btnp(3) then
+        --    move_selector("down")
+       -- elseif btnp(0) then
+         --   move_selector("left")
+       -- elseif btnp(1) then
+        --    move_selector("right")
+       -- end
 
-        if btnp(4) and not show_values then -- Gamepad (A)
-            for b in all(cases) do
-                if not b.picked and b.is_hovered then
-                    can_player_input = false
-                    b:was_clicked()
-                    update_topbar(cases_to_pick)
-                end
-            end
-        end
-    end
+        --if btnp(4) and not show_values then -- Gamepad (A)
+          --  for b in all(cases) do
+            --    if not b.picked and b.is_hovered then
+              --      can_player_input = false
+                --    b:was_clicked()
+                  --  update_topbar(cases_to_pick)
+              --  end
+           -- end
+       -- end
+ --   end
 
     for c in all(cases) do
         c:update()
@@ -662,38 +650,38 @@ function update_offer()
     btn_deal:update()
     btn_no_deal:update()
 
-    if btnp(0) then
-        offer_index = clamp(1, offer_index - 1, 2)
-    elseif btnp(1) then
-        offer_index = clamp(1, offer_index + 1, 2)
-    end
+   -- if btnp(0) then
+     --   offer_index = clamp(1, offer_index - 1, 2)
+   -- elseif btnp(1) then
+     --   offer_index = clamp(1, offer_index + 1, 2)
+   -- end
 
-    if btnp(4) then -- Gamepad (A)
-        for b in all({ btn_deal, btn_no_deal }) do
-            b:update()
-            if b.is_hovered then
-                b:was_clicked()
-            end
-        end
-    end
+   -- if btnp(4) then -- Gamepad (A)
+     --   for b in all({ btn_deal, btn_no_deal }) do
+       --     b:update()
+         --   if b.is_hovered then
+           --     b:was_clicked()
+           -- end
+       -- end
+   -- end
 end
 
-function is_valid_spot(x, y)
-    for _, c in ipairs(cases) do
-        if not c.picked and c.spot[1] == x and c.spot[2] == y then
-            return true
-        end
-    end
-    return false
-end
+--function is_valid_spot(x, y)
+  --  for _, c in ipairs(cases) do
+    --    if not c.picked and c.spot[1] == x and c.spot[2] == y then
+      --      return true
+       -- end
+   -- end
+    --return false
+--end
 
 function update_topbar(n_cases)
     local _txt = ""
     if player_case then
         if round < 1 then
-            _txt = "Pick " .. n_cases .. " more cases"
+            _txt = "PICK " .. n_cases .. " MORE CASES"
         else
-            _txt = "Pick " .. n_cases .. " case"
+            _txt = "PICK " .. n_cases .. " CASE"
         end
     else
         _txt = "Pick your case"
@@ -701,19 +689,19 @@ function update_topbar(n_cases)
     top_bar:set_text(_txt)
 end
 
-function move_selector(dir)
-    if can_player_input then
-        if dir == "up" then
-            selector_index[1] = clamp(0, selector_index[1] - 1, 4)
-        elseif dir == "down" then
-            selector_index[1] = clamp(0, selector_index[1] + 1, 3)
-        elseif dir == "left" then
-            selector_index[2] = clamp(0, selector_index[2] - 1, 5)
-        elseif dir == "right" then
-            selector_index[2] = clamp(0, selector_index[2] + 1, 5)
-        end
-    end
-end
+--function move_selector(dir)
+  --  if can_player_input then
+    --    if dir == "up" then
+       --     selector_index[1] = clamp(0, selector_index[1] - 1, 4)
+       -- elseif dir == "down" then
+          --  selector_index[1] = clamp(0, selector_index[1] + 1, 3)
+        --elseif dir == "left" then
+          ---  selector_index[2] = clamp(0, selector_index[2] - 1, 5)
+        --elseif dir == "right" then
+          --  selector_index[2] = clamp(0, selector_index[2] + 1, 5)
+        --end
+   -- end
+--end
 
 function update_deal_accepted()
     if btnp(5) then
@@ -741,16 +729,17 @@ function draw_title()
     print("Accept", 50, 42, FONT_COLOR)
     print("or", 80, 56, FONT_COLOR)
     print("Reject", 90, 72, FONT_COLOR)
-    print("Press O to play", 70, 110, FONT_COLOR)
+    print("Press SPACE to play", 70, 110, FONT_COLOR)
 end
 
 function draw_pick_case()
 
+	--if case_manager.t < 90 then
 	if is_case_opening then
 		cls()
 		 if case_manager.t < 90 then
-        print("Case " .. case_manager.cover_num .. " had", 85, 60, FONT_COLOR, false, 1, true)
-        print("$" .. comma_value(case_manager.inside_num), 85, 68, FONT_COLOR, false, 1, true) --, false, 1, true)
+        print("Case " .. case_manager.cover_num .. " had", 85, 60, FONT_COLOR)--, false, 1, true)
+        print("$" .. comma_value(case_manager.inside_num), 85, 70, FONT_COLOR)--, false, 1, true) --, false, 1, true)
     	end
 		return
 	end
@@ -767,9 +756,9 @@ function draw_pick_case()
    
 
     --print("Click to select", 3, 125, FONT_COLOR, false, 1, true)
-    if player_case then
-        print("Your Case: " .. player_case.number, 3, 125, FONT_COLOR)
-    end
+    --if player_case then
+        --print("Your Case: " .. player_case.number, 3, 125, FONT_COLOR)
+    --end
     
    draw_border()
 
@@ -777,7 +766,7 @@ function draw_pick_case()
 end
 
 function draw_display_values()
-    local _start_y = 15
+    local _start_y = 13
     rectfill(156, 9, 250, 133, 0)
 
 
@@ -787,7 +776,7 @@ function draw_display_values()
         else
             col = 5
         end
-        print("$" .. comma_value(game_values[i].value), 36 + 123, _start_y + (i - 1) * 8, col)
+        print("$" .. comma_value(game_values[i].value), 36 + 123, _start_y + (i - 1) * 9, col)
     end
 
     for i2 = 1, 12 do
@@ -796,7 +785,7 @@ function draw_display_values()
         else
             col = 5
         end
-        print("$" .. comma_value(game_values[i2 + 12].value), 63 + 123, _start_y + (i2 - 1) * 8, col, false, 1, true)
+        print("$" .. comma_value(game_values[i2 + 12].value), 63 + 123, _start_y + (i2 - 1) * 9, col, false, 1, true)
     end
 end
 
@@ -810,7 +799,7 @@ function draw_offer()
     draw_display_values()
 
 
-    print("Press O to select", 3, 127, FONT_COLOR)
+    --print("Press O to select", 3, 127, FONT_COLOR)
 
 end
 
@@ -818,7 +807,7 @@ function draw_game_over()
     print("You turned down all offers", 60, 30, FONT_COLOR)
     print("Your Case Value", 60, 45, FONT_COLOR)
     print("$" .. comma_value(player_case.value), 60, 58, FONT_COLOR)
-    print("X to reset", 60, 120, FONT_COLOR)
+    print("SPACE to return to main", 60, 120, FONT_COLOR)
 end
 
 function draw_deal_accepted()
@@ -833,7 +822,7 @@ function draw_deal_accepted()
         print("Better luck next time", 60, 100, FONT_COLOR)
     end
 
-    print("X to reset", 60, 120, FONT_COLOR)
+    print("SPACE to return to main", 60, 120, FONT_COLOR)
 end
 
 
@@ -860,9 +849,9 @@ end
 
 
 :: topbar.lua
---[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-29 16:59:15",revision=532]]
+--[[pod_format="raw",created="2025-03-27 22:57:41",modified="2025-03-29 18:33:24",revision=692]]
 
-local top_bar = {
+top_bar = {
     x = 0,
     y = 1,
     str = "test",
@@ -883,7 +872,6 @@ local top_bar = {
     end,
 }
 
-return top_bar
 :: .info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAzLTI3IDIyOjM5OjEyIixpY29uPXVzZXJkYXRhKCJ1
 OCIsMTYsMTYsIjAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwNzA3MDcwNzAxMDcw
@@ -895,11 +883,10 @@ NzAxMDYwNjA2MDYwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAx
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA2MDYwNjA2MDEwNzA3MDcwNzAxMDcwNzA3MDcwMTAxMDYw
 MTAxMDYwMTA3MDEwMTA3MDEwNzAxMDEwNzAxMDEwNjA2MDYwNjAxMDcwNzA3MDcwMTA3MDcwNzA3
 MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEw
-MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjkgMTY6NTk6MTUiLHJ1bnRpbWU9MTYsd29y
-a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSM1MjMiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9j
-YXRpb249InRvcGJhci5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iY2FzZS5s
-dWEjNTMiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImJ1dHRvbi5sdWEjMSIsd29ya3Nw
-YWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jrc3BhY2VfaW5kZXg9Mn0se2xv
-Y2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7bG9jYXRpb249InNmeC8wLnNm
-eCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
+MTAxMDEwMTAxIiksbW9kaWZpZWQ9IjIwMjUtMDMtMjkgMTg6MzM6MjUiLHJ1bnRpbWU9MTYsd29y
+a3NwYWNlcz17e2xvY2F0aW9uPSJtYWluLmx1YSMyMiIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2Nh
+dGlvbj0iY2FzZS5sdWEjMTMiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249InRvcGJhci5s
+dWEjMjIiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8wLmdmeCIsd29ya3NwYWNl
+X2luZGV4PTJ9LHtsb2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2VfaW5kZXg9M30se2xvY2F0
+aW9uPSJzZngvMC5zZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
 :: [eoc]
